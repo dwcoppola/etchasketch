@@ -1,0 +1,41 @@
+body {
+background-color: #ff0011;
+}
+#screen {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background-color: #a09898;
+  padding: 1px;
+  border: 2px solid black;
+  width: 720px;
+  height: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.button-container {
+  width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+h2,h3 {
+  color: yellow;
+}
+.cell {
+  text-align: center;
+  background-color: #c5bbbb;
+}
+#foot-buttons {
+  margin-top: 1.5em;
+}
+button {
+  margin-bottom: 1.5em;
+  width: 91px;
+  height: 21px;
+  padding-left: auto;
+  padding-right: auto;
+  background-color: aliceblue;
+}
+button:hover {
+  background-color: lightblue;
+}
