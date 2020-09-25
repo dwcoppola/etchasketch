@@ -16,17 +16,14 @@ function clearBoard() {
   while (screen.firstChild) {
     screen.removeChild(screen.firstChild);
   };
-  var size = prompt('How many squares would you like each side of the grid to be? (1 is the minimum, 150 is the maximum)',16);
+  var size = prompt('How many squares would you like each side of the grid to be? (2 is the minimum, 150 is the maximum)',16);
   if (Number(size) > 150) {
     size = 150;
-  };
-  if (Number(size) < 1) {
-    size = 1;
-  };
-  if (size.includes('.') === true) {
+  } else if (Number(size) < 1) {
+    size = 2;
+  } else if (size.includes('.') === true) {
     size = Math.round(size);
-  };
-  if (isNaN(Number(size)) === true) {
+  } else if (isNaN(Number(size)) === true) {
     size = 16;
   };
   for (i=0;i<(size**2);i++) {
