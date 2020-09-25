@@ -26,6 +26,9 @@ function clearBoard() {
   if (size.includes('.') === true) {
     size = Math.round(size);
   };
+  if (isNaN(Number(size)) === true) {
+    size = 16;
+  };
   for (i=0;i<(size**2);i++) {
     screen.setAttribute('style','grid-template-columns: repeat(' + size + ', 1fr); grid-gap: 1px;')
     cell = document.createElement('div');
