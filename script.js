@@ -13,11 +13,20 @@ for (i=0;i<(size**2);i++) {
 };
 function clearBoard() {
   var screen = document.getElementById("screen");
-    while (screen.firstChild) {
+  while (screen.firstChild) {
     screen.removeChild(screen.firstChild);
-    };
-    var size = prompt('How many squares would you like each side of the grid to be?',16);
-    for (i=0;i<(size**2);i++) {
+  };
+  var size = prompt('How many squares would you like each side of the grid to be (up to 150)?',16);
+  if (Number(size) > 150) {
+    size = 150;
+  };
+  if (Number(size) < 1) {
+    size = 1;
+  };
+  if (size.includes('.') === true) {
+    size = Math.round(size);
+  };
+  for (i=0;i<(size**2);i++) {
     screen.setAttribute('style','grid-template-columns: repeat(' + size + ', 1fr); grid-gap: 1px;')
     cell = document.createElement('div');
     cell.setAttribute('class','cell');
