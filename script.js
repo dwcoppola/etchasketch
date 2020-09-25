@@ -16,7 +16,7 @@ function clearBoard() {
   while (screen.firstChild) {
     screen.removeChild(screen.firstChild);
   };
-  var size = prompt('How many squares would you like each side of the grid to be (up to 150)?',16);
+  var size = prompt('How many squares would you like each side of the grid to be? (1 is the minimum, 150 is the maximum)',16);
   if (Number(size) > 150) {
     size = 150;
   };
