@@ -1,32 +1,46 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Etch A Sketch -Esque</title>
-<link href="style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-  <div class="button-container">
-    <h2>Welcome to Etch A Sketch -Esque. Have fun!</h2>
-    <button onclick="clearBoard()" id="clear-button">CLEAR ALL</button>
-    <button onclick="blackPen()" id="black-pen">BLACK PEN</button>
-    <button onclick="eraser()" id="eraser">ERASER</button>
-  </div>
-  <div class="button-container">
-    <button onclick="redPen()" id="red-pen">RED</button>
-    <button onclick="greenPen()" id="green-pen">GREEN</button>
-    <button onclick="bluePen()" id="blue-pen">BLUE</button>
-    <button onclick="orangePen()" id="orange-pen">ORANGE</button>
-    <button onclick="purplePen()" id="purple-pen">PURPLE</button>
-    <button onclick="yellowPen()" id="yellow-pen">YELLOW</button>
-    <button onclick="randomColorPen()" id="color-pen">MAGIC</button>
-  </div>
-  <div id="screen">
-  </div>
-  <div id="foot-buttons" class="button-container">
-  <button onclick="gridOn()" id="grid-on">GRID</button>
-  <button onclick="gridOff()" id="grid-off">NO GRID</button>
-  </div>
-<script src="script.js">
-</script>
-</body>
+<html lang="en">
+    <head>
+        <title>Etch A Sketch -Esque</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <h2>Welcome to Etch A Sketch -Esque. Have fun!</h2>
+        <div class="button-container">
+            <hr>
+            <section>
+                <label><b>Pen Color</b></label>
+                <div id="preview"></div>
+                <div class="slide-container"><b>R:</b>
+                    <input class="slider" type="range" id="red" min="0" max="255" value="0" onchange="establishPreviewBG()"/>
+                </div>
+                <div class="slide-container"><b>G:</b>
+                    <input class="slider" type="range" id="green" min="0" max="255" value="0" onchange="establishPreviewBG()"/>
+                </div>
+                <div class="slide-container"><b>B:</b>
+                    <input class="slider" type="range" id="blue" min="0" max="255" value="0" onchange="establishPreviewBG()"/>
+                </div>
+            </section>
+            <hr>
+            <!--<button onclick="etchasketch.changePenColor('red')">RED</button>
+            <button onclick="etchasketch.changePenColor('green')">GREEN</button>
+            <button onclick="etchasketch.changePenColor('blue')">BLUE</button>
+            <button onclick="etchasketch.changePenColor('orange')">ORANGE</button>
+            <button onclick="etchasketch.changePenColor('purple')">PURPLE</button>
+            <button onclick="etchasketch.changePenColor('yellow')">YELLOW</button!-->
+            
+        </div>
+        <div class="button-container">
+            <button onclick="etchasketch.clearBoard()">CLEAR ALL</button>
+            <button onclick="etchasketch.changePenColor('black')">BLACK PEN</button>
+            <button onclick="etchasketch.changePenColor('#c5bbbb')">ERASER</button>
+            <button onclick="etchasketch.changePenColor('magic')">MAGIC</button>
+        </div>
+        <div id="screen"></div>
+        <div id="foot-buttons" class="button-container">
+            <button onclick="etchasketch.gridOn()" id="grid-on">GRID</button>
+            <button onclick="etchasketch.gridOff()" id="grid-off">NO GRID</button>
+        </div>
+    </body>
 </html>

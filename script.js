@@ -1,101 +1,98 @@
-var screen = document.getElementById("screen");
-var size = 16;
-var red = Math.floor(Math.random() * 256);
-var blue = Math.floor(Math.random() * 256);
-var green = Math.floor(Math.random() * 256);
-var newColor = 'rgb(' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ',' + Math.floor(Math.random() * 256) + ')';
-for (i=0;i<(size**2);i++) {
-  screen.setAttribute('style','grid-template-columns: repeat(' + size + ', 1fr); grid-gap: 1px;')
-  cell = document.createElement('div');
-  cell.setAttribute('class','cell');
-  cell.setAttribute('onmouseover',`{this.style.background = 'rgb(0,0,0)'}`);
-  screen.appendChild(cell);
-};
-function clearBoard() {
-  var screen = document.getElementById("screen");
-  while (screen.firstChild) {
-    screen.removeChild(screen.firstChild);
-  };
-  var size = prompt('How many squares would you like each side of the grid to be? (2 is the minimum, 150 is the maximum)',16);
-  if (Number(size) > 150) {
-    size = 150;
-  } else if (Number(size) < 1) {
-    size = 2;
-  } else if (size.includes('.') === true) {
-    size = Math.round(size);
-  } else if (isNaN(Number(size)) === true) {
-    size = 16;
-  };
-  for (i=0;i<(size**2);i++) {
-    screen.setAttribute('style','grid-template-columns: repeat(' + size + ', 1fr); grid-gap: 1px;')
-    cell = document.createElement('div');
-    cell.setAttribute('class','cell');
-    cell.setAttribute('onmouseover',`{this.style.background = 'rgb(0,0,0)'}`);
-    screen.appendChild(cell);
-  };
-};
-function randomColorPen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `setColor(); {this.style.background = newColor}`);
-  };
-};
-function setColor() {
-  newColor = 'rgb(' + Math.floor(Math.random() * 256) + ',' + 
-  Math.floor(Math.random() * 256) + ',' + 
-  Math.floor(Math.random() * 256) + ')';
-};
-function blackPen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'rgb(0,0,0)'}`);
-  };
-};
-function redPen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'red'}`);
-  };
-};
-function greenPen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'green'}`);
-  };
-};
-function bluePen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'blue'}`);
-  };
-};
-function purplePen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'purple'}`);
-  };
-};
-function orangePen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'orange'}`);
-  };
-};
-function yellowPen() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = 'yellow'}`);
-  };
-};
-function eraser() {
-  for (i=0;i<screen.childElementCount;i++) {
-  cell = document.getElementsByClassName('cell');
-  cell[i].setAttribute('onmouseover', `{this.style.background = '#c5bbbb'}`);
-  };
-};
-function gridOn() {
-  screen.style.gridGap = "1px";
-};
-function gridOff() {
-  screen.style.gridGap = "0px";
-};
+class EtchASketch {
+    constructor() {
+        this.screen = document.getElementById("screen");
+        this.penColor = 'black';
+    }
+
+    buildBoard = (size) => {
+        
+        while (this.screen.firstChild) {
+            this.screen.removeChild(this.screen.firstChild);
+        }
+
+        for (let i = 0; i < (size**2); i++) {
+            let cell = document.createElement('div');
+            this.screen.setAttribute('style','grid-template-columns: repeat(' + size + ', 1fr); grid-gap: 1px;')
+            cell.setAttribute('class','cell');
+            cell.setAttribute('onmouseover',`{this.style.background = 'rgb(0,0,0)'}`);
+            cell.setAttribute('id', i);
+            this.screen.appendChild(cell);
+        }
+    }
+        
+    clearBoard = () => {
+        
+        let answer = prompt('How many squares would you like each side of the grid to be? (2 is the minimum, 50 is the maximum)', 16);
+        
+        if (Number(answer) > 100) {
+            etchasketch.buildBoard(100);
+        } else if (Number(answer) <= 1) {
+            etchasketch.buildBoard(2);
+        } else if (answer.includes('.') === true) {
+            etchasketch.buildBoard(Math.round(answer));
+        } else if (isNaN(Number(answer)) === true) {
+            etchasketch.buildBoard(16);
+        } else if (answer === 16) {
+            etchasketch.buildBoard(16);
+        } else {
+            etchasketch.buildBoard(answer);
+        }
+
+        resetPreview();
+
+    }
+
+    changePenColor = (color) => {
+        const cells = document.getElementsByClassName('cell');  
+        if (color === 'magic') {
+            for (let cell of cells) {
+                cell.setAttribute('onmouseover', `etchasketch.changeCellColor(${cell.id})`);
+            }               
+        } else {   
+            for (let cell of cells) {
+                cell.setAttribute('onmouseover', `this.style.background = "${color}"`);
+            }
+        }         
+    }
+    
+    changeCellColor = (id) => {
+        const cell = document.getElementById(id);
+        const red = Math.floor(Math.random() * 255);
+        const green = Math.floor(Math.random() * 255);
+        const blue = Math.floor(Math.random() * 255);
+        cell.setAttribute('style', `background-color: rgb(${red}, ${green}, ${blue})`);
+    }
+
+    gridOn = () => {
+        this.screen.style.gridGap = "1px";
+    }
+    
+    gridOff = () => {
+        this.screen.style.gridGap = "0px";
+    }
+
+}
+
+const etchasketch = new EtchASketch();
+etchasketch.buildBoard(16);
+
+function establishPreviewBG() {
+    const red = document.getElementById('red');
+    const green = document.getElementById('green');
+    const blue = document.getElementById('blue');
+    const preview = document.querySelector('#preview');
+    preview.setAttribute('style', `background-color: rgb(${red.value}, ${green.value}, ${blue.value})`);
+    etchasketch.changePenColor(`rgb(${red.value}, ${green.value}, ${blue.value})`);
+}
+
+function resetPreview() {
+    const red = document.getElementById('red');
+    const green = document.getElementById('green');
+    const blue = document.getElementById('blue');
+    red.value = 0;
+    green.value = 0;
+    blue.value = 0;
+    establishPreviewBG();
+}
+
+establishPreviewBG();
